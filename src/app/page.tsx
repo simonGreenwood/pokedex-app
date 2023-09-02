@@ -1,31 +1,47 @@
-import Image from "next/image";
-import PokemonCard from "@/components/PokemonCard";
-async function getData() {
-  const res = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0"
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+import { getClient } from "@/lib/client";
+import { gql } from "@apollo/client";
+export const query = gql`
+  query FetchAllPokemon {
+    gen3_species: pokemon_v2_pokemonspecies(where: {}, order_by: { id: asc }) {
+      name
+      id
+    }
+    generations: pokemon_v2_generation {
+      name
+      pokemon_species: pokemon_v2_pokemonspecies_aggregate {
+        aggregate {
+          count
+        }
+      }
+      pokemon_v2_region {
+        id
+        name
+      }
+    }
   }
+`;
 
-  return res.json();
-}
 export default async function Home() {
-  const data = await getData();
-
+  const { data } = await getClient().query({ query });
+  console.log(data);
   return (
-    <div>
-      {data.results.map((pokemon: any) => {
-        const data = fetch(pokemon.url);
-        console.log(data);
-
-        return (
-          <div key={"lol"}>
-            <PokemonCard data={data} />
-          </div>
-        );
-      })}
-    </div>
+    <main>
+      {data.gen3_species.map((p) => (
+        <div key="p.id">
+          <h1>{p.name}</h1>
+          <p>{p.id}</p>
+        </div>
+      ))}
+      {data.generations.map((g) => (
+        <div key={g.name}>
+          <h1>{g.name}</h1>
+          <p>{g.pokemon_species.aggregate.count}</p>
+          <p>
+            {g.pokemon_v2_region.name}
+            {g.pokemon_v2_region.id}
+          </p>
+        </div>
+      ))}
+    </main>
   );
 }
