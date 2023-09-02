@@ -1,13 +1,27 @@
 import { gql } from "@apollo/client";
 
-export const FETCH_ALL_POKEMON = gql`
-  query FetchAllPokemon {
-    gen3_species: pokemon_v2_pokemonspecies(
-      where: { pokemon_v2_generation: { name: { _eq: "generation-iii" } } }
-      order_by: { id: asc }
-    ) {
-      name
-      id
+export const fetchAllPokemon = gql`
+  query fetchAllPokemon {
+    pokemon: pokemon_v2_pokemon_aggregate ($where: { id: { _lte: 5 } }}){
+      nodes {
+        id
+        pokemon_species_id
+        name
+        is_default
+        sprites: pokemon_v2_pokemonsprites {
+          sprites
+        }
+        species: pokemon_v2_pokemonspecy {
+          name
+        }
+        forms: pokemon_v2_pokemonforms {
+          names: pokemon_v2_pokemonformnames(
+            where: { language_id: { _eq: 9 } }
+          ) {
+            name
+          }
+        }
+      }
     }
   }
 `;

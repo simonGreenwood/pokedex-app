@@ -1,47 +1,37 @@
 import { getClient } from "@/lib/client";
-import { gql } from "@apollo/client";
-export const query = gql`
-  query FetchAllPokemon {
-    gen3_species: pokemon_v2_pokemonspecies(where: {}, order_by: { id: asc }) {
-      name
-      id
-    }
-    generations: pokemon_v2_generation {
-      name
-      pokemon_species: pokemon_v2_pokemonspecies_aggregate {
-        aggregate {
-          count
-        }
-      }
-      pokemon_v2_region {
-        id
-        name
-      }
-    }
-  }
-`;
-
+import { fetchAllPokemon } from "@/queries";
+import { PokemonInList } from "@/types";
+import Image from "next/image";
 export default async function Home() {
-  const { data } = await getClient().query({ query });
+  const { data } = await getClient().query({ query: fetchAllPokemon });
   console.log(data);
+  console.log(data.pokemon.nodes[0].sprites[0].sprites);
+
   return (
     <main>
-      {data.gen3_species.map((p) => (
-        <div key="p.id">
-          <h1>{p.name}</h1>
-          <p>{p.id}</p>
-        </div>
-      ))}
-      {data.generations.map((g) => (
-        <div key={g.name}>
-          <h1>{g.name}</h1>
-          <p>{g.pokemon_species.aggregate.count}</p>
-          <p>
-            {g.pokemon_v2_region.name}
-            {g.pokemon_v2_region.id}
-          </p>
-        </div>
-      ))}
+      {data?.pokemon.nodes.map((pokemon: PokemonInList) => {
+        return (
+          <div key={pokemon.id}>
+            <p>
+              {`lol ${console.log(data.pokemon.nodes[0].sprites[0].sprites)}`}
+              <Image
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master${JSON.parse(
+                  pokemon.sprites[0].sprites
+                ).icons.front_default.slice(6)}`}
+                alt={pokemon.species.name}
+                width={100}
+                height={100}
+              />
+
+              {pokemon.species.name.charAt(0).toUpperCase() +
+                pokemon.species.name.slice(1)}
+              {pokemon.forms[0].names[0] &&
+                ` (${pokemon.forms[0].names[0].name})`}
+            </p>
+            <p>{pokemon.id}</p>
+          </div>
+        );
+      })}
     </main>
   );
 }
