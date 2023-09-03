@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const fetchAllPokemon = gql`
   query fetchAllPokemon {
-    pokemon: pokemon_v2_pokemon_aggregate ($where: { id: { _lte: 5 } }}){
+    pokemon: pokemon_v2_pokemon_aggregate(where: { id: { _lte: 60 } }) {
       nodes {
         id
         pokemon_species_id
