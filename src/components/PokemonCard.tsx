@@ -9,8 +9,8 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonInList }) {
   };
   return (
     <div key={pokemon.id}>
-      <div className="bg-gradient-radial from-slate-950">
-        <div className="border-2 border-slate-300 rounded-lg">
+      <div className="bg-gradient-conic from-transparent via-sky-400 via-30%">
+        <div className="border-2 border-slate-300 rounded-lg bg-gradient-radial from-green-400">
           <Image
             src={generateURL(pokemon)}
             alt="photo of pokemon sprite"
