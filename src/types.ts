@@ -6,12 +6,14 @@ export type PokemonInList = {
   sprites: {
     sprites: string;
   }[];
-  species: {
-    name: string;
-  };
   forms: {
     names: {
       name: string;
     }[];
+  }[];
+  types: {
+    type: {
+      name: string;
+    };
   }[];
 };
