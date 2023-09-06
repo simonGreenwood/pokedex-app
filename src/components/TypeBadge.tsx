@@ -17,7 +17,7 @@ export default function TypeBadge(props: Props) {
   if (props.type == "rock") color = "bg-yellow-800";
   if (props.type == "ghost") color = "bg-purple-700";
   if (props.type == "dragon") color = "bg-amber-500";
-  if (props.type == "dark") color = "bg-gray-800";
+  if (props.type == "dark") color = "bg-black";
   if (props.type == "steel") color = "bg-slate-500";
   if (props.type == "fairy") color = "bg-pink-300";
   if (props.type == "normal") color = "bg-gray-500";

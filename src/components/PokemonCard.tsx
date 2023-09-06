@@ -29,7 +29,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonInList }) {
             alt="photo of pokemon sprite"
             width={192}
             height={192}
-            className="mx-auto relative p-5"
+            className="mx-auto relative p-5 hover:scale-110 transition duration-500 ease-in-out"
           />
         </Gradient>
         <div className="grid place-items-center">
