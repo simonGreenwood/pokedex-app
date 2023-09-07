@@ -48,6 +48,13 @@ export const fetchPokemon = gql`
           name
         }
       }
+      text: pokemon_v2_pokemonspecies {
+        text: pokemon_v2_pokemonspeciesflavortexts(
+          where: { language_id: { _eq: 9 } }
+        ) {
+          flavor_text
+        }
+      }
     }
   }
 `;
