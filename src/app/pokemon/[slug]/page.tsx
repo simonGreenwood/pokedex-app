@@ -1,15 +1,17 @@
-"use client";
 import { fetchPokemon } from "@/queries";
+import { useRouter } from "next/navigation";
+import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { getClient } from "@/lib/client";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useSuspenseQuery } from "@apollo/client";
-
-export default function PokemonPage() {
-  // fetch the pokemon data
-  const router = useRouter();
-  const { data } = useSuspenseQuery(fetchPokemon, {
-    variables: { slug: router.query.slug },
+export default async function PokemonPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = params;
+  console.log(slug);
+  const { data } = await getClient().query({
+    query: fetchPokemon,
+    variables: { id: slug },
   });
   return (
     <div>

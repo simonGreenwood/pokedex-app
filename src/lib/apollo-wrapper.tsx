@@ -2,15 +2,15 @@
 
 import { ApolloClient, ApolloLink, HttpLink } from "@apollo/client";
 import {
-  ApolloNextAppProvider
+  ApolloNextAppProvider,
+  NextSSRApolloClient,
   NextSSRInMemoryCache,
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr";
 
 function makeClient() {
   const httpLink = new HttpLink({
-    // https://studio.apollographql.com/public/spacex-l4uc6p/
-    uri: "beta.pokeapi.co/graphql/v1beta",
+    uri: "https://beta.pokeapi.co/graphql/v1beta",
   });
 
   return new NextSSRApolloClient({
