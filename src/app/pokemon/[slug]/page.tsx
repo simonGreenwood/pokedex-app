@@ -4,7 +4,6 @@ import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { getClient } from "@/lib/client";
 import Gradient from "@/components/CardImageGradient";
 import Image from "next/image";
-import PokemonImage from "@/components/PokemonImage";
 export default async function PokemonPage({
   params,
 }: {
@@ -17,10 +16,18 @@ export default async function PokemonPage({
     variables: { id: slug },
   });
   const pokemon = data.pokemon;
+  console.log(pokemon.species.species[0].flavortext[0].flavor_text);
+  console.log(pokemon.sprites[0].sprites.front_default);
   return (
     <div>
-      <h1>{data.pokemon.name}</h1>
-      <h1>{data.pokemon.text.text.flavor_text}</h1>
+      <h1>{pokemon.name}</h1>
+      <Image
+        src={pokemon.sprites[0].sprites.front_default}
+        alt={pokemon.name}
+        width={200}
+        height={200}
+      />
+      <h1>{pokemon.species.species[0].flavortext[0].flavor_text}</h1>
     </div>
   );
 }
