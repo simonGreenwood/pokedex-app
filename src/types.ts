@@ -16,6 +16,12 @@ export type PokemonInList = {
       name: string;
     };
   }[];
+  species: {
+    speciesnames: {
+      name: string;
+      genus: string;
+    }[];
+  };
 };
 
 export type Pokemon = {
@@ -41,4 +47,14 @@ export type Pokemon = {
       flavor_text: string;
     }[];
   };
+};
+
+export type PokemonInListQuery = {
+  pokemon: {
+    nodes: PokemonInList[];
+  };
+};
+
+export type PokemonQuery = {
+  pokemon: Pokemon;
 };

@@ -3,14 +3,26 @@ import PokemonCard from "./PokemonCard";
 import { PokemonInList } from "@/types";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
+import TypeBadge from "./TypeBadge";
+import PokemonView from "./PokemonView";
 interface Props {
   data: any;
 }
 
 export default function PokemonGrid(props: Props) {
   const [searchFilter, setSearchFilter] = useState("");
+  const [currentPokemon, setCurrentPokemon] = useState<PokemonInList | null>(
+    null
+  );
   return (
     <div>
+      {currentPokemon && (
+        <PokemonView
+          pokemonId={currentPokemon.id}
+          setCurrentPokemon={setCurrentPokemon}
+        />
+      )}
+
       <SearchBar
         searchFilter={searchFilter}
         setSearchFilter={setSearchFilter}
@@ -21,7 +33,11 @@ export default function PokemonGrid(props: Props) {
             pokemon.name.includes(searchFilter)
           )
           .map((pokemon: PokemonInList) => (
-            <PokemonCard pokemon={pokemon} key={pokemon.id} />
+            <PokemonCard
+              pokemon={pokemon}
+              key={pokemon.id}
+              setCurrentPokemon={setCurrentPokemon}
+            />
           ))}
       </div>
     </div>

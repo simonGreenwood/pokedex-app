@@ -2,7 +2,11 @@ import { PokemonInList } from "@/types";
 import TypeBadge from "./TypeBadge";
 import PokemonCardImage from "./PokemonCardImage";
 import Link from "next/link";
-export default function PokemonCard({ pokemon }: { pokemon: PokemonInList }) {
+type Props = {
+  pokemon: PokemonInList;
+  setCurrentPokemon: (pokemon: PokemonInList | null) => void;
+};
+export default function PokemonCard(props: Props) {
   const addZeros = (id: number) => {
     if (id < 10) {
       return `00${id}`;
@@ -13,18 +17,19 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonInList }) {
     }
   };
   return (
-    <div key={pokemon.id}>
+    <div key={props.pokemon.id}>
       <div className=" bg-gray-800 rounded-lg">
-        <Link href={`/pokemon/${pokemon.id}`}>
-          <PokemonCardImage pokemon={pokemon} />
-        </Link>
+        <button onClick={() => props.setCurrentPokemon(props.pokemon)}>
+          <PokemonCardImage pokemon={props.pokemon} />
+        </button>
         <div className="grid place-items-center">
-          <p className="text-gray-400">#{addZeros(pokemon.id)}</p>
+          <p className="text-gray-400">#{addZeros(props.pokemon.id)}</p>
           <p className="text-xl ">
-            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+            {props.pokemon.name.charAt(0).toUpperCase() +
+              props.pokemon.name.slice(1)}
           </p>
           <div className="flex flex-row">
-            {pokemon.types.map((type) => (
+            {props.pokemon.types.map((type) => (
               <TypeBadge type={type.type.name} key={type.type.name} />
             ))}
           </div>
