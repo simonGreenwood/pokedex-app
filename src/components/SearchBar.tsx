@@ -1,6 +1,8 @@
+import { Dispatch } from "react";
+
 export default function SearchBar(props: {
   searchFilter: string;
-  setSearchFilter: (arg0: string) => void;
+  setSearchFilter: Dispatch<React.SetStateAction<string>>;
 }) {
   return (
     <div>

@@ -17,6 +17,8 @@ export type PokemonInList = {
     };
   }[];
   species: {
+    is_legendary: boolean;
+    is_mythical: boolean;
     speciesnames: {
       name: string;
       genus: string;
@@ -46,7 +48,23 @@ export type Pokemon = {
     text: {
       flavor_text: string;
     }[];
+  }[];
+  species: {
+    is_legendary: boolean;
+    is_mythical: boolean;
+    species: {
+      flavor_text: {
+        flavor_text: string;
+      }[];
+    };
+    speciesnames: {
+      name: string;
+
+      genus: string;
+    }[];
   };
+  weight: number;
+  height: number;
 };
 
 export type PokemonInListQuery = {

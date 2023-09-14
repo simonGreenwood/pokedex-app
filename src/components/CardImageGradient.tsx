@@ -97,7 +97,7 @@ export default function Gradient(props: {
         <div
           className={`bg-gradient-conic from-transparent ${colors.color2} via-30% `}
         >
-          <div className="bg-gradient-radial from-transparent to-gray-800 to-70%">
+          <div className="bg-gradient-radial from-transparent to-gray-950 to-75% ">
             {props.children}
           </div>
         </div>

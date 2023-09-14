@@ -7,7 +7,7 @@ export default async function Home() {
   const { data } = await getClient().query({ query: fetchAllPokemon });
   return (
     <main>
-      <div>
+      <div className="bg-gray-900 min-h-screen">
         <PokemonGrid data={data} />
         {/*data?.pokemon.nodes.map((pokemon: PokemonInList) => (
           <PokemonCard pokemon={pokemon} key={pokemon.id} />

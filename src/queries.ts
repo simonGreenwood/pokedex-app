@@ -13,6 +13,8 @@ export const fetchAllPokemon: TypedDocumentNode<PokemonInListQuery> = gql`
           sprites
         }
         species: pokemon_v2_pokemonspecy {
+          is_legendary
+          is_mythical
           speciesnames: pokemon_v2_pokemonspeciesnames(
             where: { language_id: { _eq: 9 } }
           ) {
@@ -44,6 +46,8 @@ export const fetchPokemon: TypedDocumentNode<PokemonQuery> = gql`
       pokemon_species_id
       name
       is_default
+      weight
+      height
       sprites: pokemon_v2_pokemonsprites {
         sprites
       }
@@ -58,11 +62,18 @@ export const fetchPokemon: TypedDocumentNode<PokemonQuery> = gql`
         }
       }
       species: pokemon_v2_pokemonspecy {
+        is_legendary
+        is_mythical
         species: pokemon_v2_pokemonspecies {
           flavortext: pokemon_v2_pokemonspeciesflavortexts(
             where: { language_id: { _eq: 9 } }
           ) {
             flavor_text
+          }
+          speciesnames: pokemon_v2_pokemonspeciesnames {
+            name
+            genus
+            language_id
           }
         }
         evolutions: pokemon_v2_pokemonevolutions {

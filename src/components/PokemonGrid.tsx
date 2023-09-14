@@ -1,12 +1,12 @@
 "use client";
 import PokemonCard from "./PokemonCard";
-import { PokemonInList } from "@/types";
+import { PokemonInList, PokemonInListQuery } from "@/types";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 import TypeBadge from "./TypeBadge";
 import PokemonView from "./PokemonView";
 interface Props {
-  data: any;
+  data: PokemonInListQuery | undefined;
 }
 
 export default function PokemonGrid(props: Props) {
@@ -27,7 +27,7 @@ export default function PokemonGrid(props: Props) {
         searchFilter={searchFilter}
         setSearchFilter={setSearchFilter}
       />
-      <div className="grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 p-5">
+      <div className="grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-8 p-5">
         {props.data?.pokemon.nodes
           .filter((pokemon: PokemonInList) =>
             pokemon.name.includes(searchFilter)
