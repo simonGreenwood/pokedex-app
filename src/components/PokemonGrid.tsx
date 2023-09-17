@@ -27,7 +27,7 @@ export default function PokemonGrid(props: Props) {
         searchFilter={searchFilter}
         setSearchFilter={setSearchFilter}
       />
-      <div className="grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-8 p-5">
+      <div className="grid grid-cols-5 gap-x-1 gap-y-5">
         {props.data?.pokemon.nodes
           .filter((pokemon: PokemonInList) =>
             pokemon.name.includes(searchFilter)

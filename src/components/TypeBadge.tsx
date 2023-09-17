@@ -82,17 +82,16 @@ export default function TypeBadge(props: Props) {
   }
 
   if (props.type == "mythical") {
-    emoji = "🌟";
+    emoji = "✨";
     color = "border-yellow-500";
   }
 
   return (
     <p
       key={props.type}
-      className={`text-xs text-white mx-1 mt-2 mb-3 rounded-lg px-2 py-1 border ${color}`}
+      className={`text-xs text-white mx-1 mt-2  rounded-lg px-2 py-1 border ${color} whitespace-nowrap`}
     >
-      {emoji}
-      {props.type.charAt(0).toUpperCase() + props.type.slice(1)}
+      {emoji} {props.type.charAt(0).toUpperCase() + props.type.slice(1)}
     </p>
   );
 }
