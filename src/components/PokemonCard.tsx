@@ -11,7 +11,7 @@ type Props = {
 export default function PokemonCard(props: Props) {
   return (
     <div key={props.pokemon.id} className="max-w-xs">
-      <div className=" bg-gray-950 rounded-lg border-gray-600 ">
+      <div className=" bg-gray-950 rounded-lg border-gray-600 p-2 pt-3">
         <div className="grid place-items-center ">
           <button
             className="align-center content-center"
@@ -26,6 +26,8 @@ export default function PokemonCard(props: Props) {
               .charAt(0)
               .toUpperCase() +
               props.pokemon.species.speciesnames[0].name.slice(1)}
+            {props.pokemon.species.is_legendary && "🌟"}
+            {props.pokemon.species.is_mythical && "✨"}
           </p>
           <p className="text-gray-400 text-sm ">
             {/*pokemon genus*/}
