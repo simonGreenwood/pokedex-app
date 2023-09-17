@@ -15,7 +15,7 @@ export default function PokemonGrid(props: Props) {
     null
   );
   return (
-    <div className="no-scrollbar">
+    <div className="no-scrollbar flex flex-col">
       {currentPokemon && (
         <PokemonView
           pokemonId={currentPokemon.id}
@@ -27,7 +27,7 @@ export default function PokemonGrid(props: Props) {
         searchFilter={searchFilter}
         setSearchFilter={setSearchFilter}
       />
-      <div className="flex flex-wrap items-stretch place-content-between gap-y-5 p-10 no-scrollbar">
+      <div className=" flex flex-wrap justify-center content-around items-start gap-5 p-10 no-scrollbar text-blue-600">
         {props.data?.pokemon.nodes
           .filter((pokemon: PokemonInList) =>
             pokemon.name.includes(searchFilter)
