@@ -3,15 +3,14 @@ import TypeBadge from "./TypeBadge";
 import PokemonCardImage from "./PokemonCardImage";
 import Link from "next/link";
 import { addZeros } from "@/utils/utils";
-import { type } from "os";
 type Props = {
   pokemon: PokemonInList;
   setCurrentPokemon: (pokemon: PokemonInList | null) => void;
 };
 export default function PokemonCard(props: Props) {
   return (
-    <div key={props.pokemon.id} className="max-w-xs">
-      <div className=" bg-gray-950 rounded-lg border-gray-600 p-2 pt-3">
+    <div key={props.pokemon.id} >
+      <div className="bg-gray-950 rounded-lg border-gray-600 p-2 pt-3 w-56 h-[22.5rem] ">
         <div className="grid place-items-center ">
           <button
             className="align-center content-center"
@@ -37,6 +36,8 @@ export default function PokemonCard(props: Props) {
             {props.pokemon.types.map((type) => (
               <TypeBadge type={type.type.name} key={type.type.name} />
             ))}
+            {props.pokemon.species.is_legendary && <TypeBadge type="legendary"/>}
+            {props.pokemon.species.is_mythical && <TypeBadge type="mythical"/>}
           </div>
         </div>
       </div>
