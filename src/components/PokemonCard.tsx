@@ -13,7 +13,7 @@ export default function PokemonCard(props: Props) {
       <div className="bg-gray-950 rounded-lg border-gray-600 p-2 pt-3 w-56 h-[22.5rem] ">
         <div className="grid place-items-center ">
           <button
-            className="align-center content-center"
+            className="align-center content-center" 
             onClick={() => props.setCurrentPokemon(props.pokemon)}
           >
             <PokemonCardImage pokemon={props.pokemon} />
@@ -25,8 +25,6 @@ export default function PokemonCard(props: Props) {
               .charAt(0)
               .toUpperCase() +
               props.pokemon.species.speciesnames[0].name.slice(1)}
-            {props.pokemon.species.is_legendary && "🌟"}
-            {props.pokemon.species.is_mythical && "✨"}
           </p>
           <p className="text-gray-400 text-sm ">
             {/*pokemon genus*/}

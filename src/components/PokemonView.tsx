@@ -25,38 +25,26 @@ export default function PokemonView(props: Props) {
   console.log(data);
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-950 bg-opacity-50 flex justify-center items-center z-10">
-      <div className="bg-gray-800 p-5 rounded-lg ">
-        <div className="flex flex-row">
-          <div>
-            <p className="text-gray-400 text-xl">
-              #{addZeros(data.pokemon.id)}
-            </p>
-            {JSON.stringify(data.pokemon.species.speciesnames)}
-            <p className="text-5xl pb-5">
-              {data.pokemon.name.charAt(0).toUpperCase() +
-                data.pokemon.name.slice(1)}
-            </p>
-            <p className="text-gray-400 text-xl">
-              Height: {data.pokemon.height / 10}m
-            </p>
-            <p className="text-gray-400 text-xl">
-              Weight: {data.pokemon.weight / 10}kg
-            </p>
-            <div className="flex flex-row">
-              {data.pokemon.types.map((type) => (
-                <TypeBadge type={type.type.name} key={type.type.name} />
-              ))}
-            </div>
-            <Image
-              src={generateURL(data.pokemon)}
-              alt="photo of pokemon sprite"
-              width={400}
-              height={400}
-              className="mx-auto relative p-5 hover:scale-110 transition duration-500 ease-in-out"
-            />
+      <div className="bg-gray-800 rounded-lg">
+        <div>
+        <div className="text-xl text-white">
+            {data.pokemon.species.speciesnames[0].name
+              .charAt(0)
+              .toUpperCase() +
+              data.pokemon.species.speciesnames[0].name.slice(1)}
           </div>
         </div>
-      </div>
+        <Image src={generateURL(data.pokemon)} width={300} height={300} alt="pokemon photo"/>
+        <div className="flex flex-col items-center">
+          <div className="flex flex-wrap overflow-x-auto justify-center pb-4 max-width-xs">
+            {data.pokemon.types.map((type) => (
+              <TypeBadge type={type.type.name} key={type.type.name} />
+            ))}
+            {data.pokemon.species.is_legendary && <TypeBadge type="legendary"/>}
+            {data.pokemon.species.is_mythical && <TypeBadge type="mythical"/>}
+          </div>
+        </div>
+      </div>    
     </div>
   );
 }
